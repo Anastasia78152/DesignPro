@@ -1,0 +1,28 @@
+# Виртуальное окружение
+venv/
+.venv/
+
+# База данных
+db.sqlite3
+
+# Загруженные пользователями файлы
+media/
+
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Visual Studio
+.vs/
+*.slnx
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# IDE
+.idea/
+
+# OS
+Thumbs.db
