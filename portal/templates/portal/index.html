@@ -1,0 +1,25 @@
+{% extends "portal/base.html" %}
+{% block title %}Главная - Design.pro{% endblock %}
+
+{% block content %}
+<h2>Добро пожаловать в студию Design.pro!</h2>
+<p>Сейчас в работе: <strong>{{ in_progress_count }}</strong> заявок.</p>
+
+<h3>Наши последние выполненные проекты:</h3>
+    {% if done_requests %}
+        {% for req in done_requests %}
+<div class="card">
+    {% if req.design_image %}
+    <img src="{{ req.design_image.url }}" alt="Дизайн">
+    {% endif %}
+    <div>
+        <h4>{{ req.title }}</h4>
+        <p><strong>Категория:</strong> {{ req.category.name }}</p>
+        <p><strong>Дата:</strong> {{ req.created_at|date:"d.m.Y" }}</p>
+    </div>
+</div>
+        {% endfor %}
+    {% else %}
+<p>Пока нет выполненных заявок.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "portal/base.html" %}
+
+{% block title %}Удаление заявки — DesignPro{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="alert alert-danger">
+            <h4>Подтверждение удаления</h4>
+            <p>Вы уверены, что хотите удалить заявку <strong>"{{ request_obj.title }}"</strong>?</p>
+            <p class="text-muted">Это действие нельзя отменить.</p>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Да, удалить</button>
+            <a href="{% url 'user_dashboard' %}" class="btn btn-secondary">Отмена</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

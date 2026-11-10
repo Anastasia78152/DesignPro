@@ -1,0 +1,37 @@
+{% extends "portal/base.html" %}
+{% block content %}
+<h2>Панель администратора</h2>
+
+<h3>Управление категориями</h3>
+<ul>
+    {% for cat in categories %}
+    <li>
+        {{ cat.name }}
+        <a href="{% url 'delete_category' cat.pk %}" class="btn btn-danger" style="padding:2px 8px; font-size:12px;">Удалить</a>
+    </li>
+    {% endfor %}
+</ul>
+<form method="post" action="{% url 'add_category' %}" style="display:flex; gap:10px; max-width:400px;">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Новая категория" required>
+    <button type="submit" class="btn btn-success">Добавить</button>
+</form>
+
+<h3 style="margin-top:30px;">Все заявки</h3>
+    {% for req in requests_list %}
+<div class="card">
+    <div style="flex:1;">
+        <h4>{{ req.title }} <span class="status-{{ req.status }}">({{ req.get_status_display }})</span></h4>
+        <p><small>От: {{ req.user.profile.full_name }} | {{ req.created_at|date:"d.m.Y" }}</small></p>
+        <p>{{ req.description }}</p>
+    </div>
+    <div>
+        {% if req.status == 'new' %}
+        <a href="{% url 'change_status' req.pk %}" class="btn">Сменить статус</a>
+        {% else %}
+        <span style="color:#999; font-size:14px;">Статус изменён</span>
+        {% endif %}
+    </div>
+</div>
+    {% endfor %}
+{% endblock %}
