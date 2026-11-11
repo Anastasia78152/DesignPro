@@ -11,4 +11,6 @@ urlpatterns = [
     path('request/<int:pk>/delete/', views.delete_request, name='delete_request'),
     path('superadmin/', views.admin_dashboard, name='admin_dashboard'),
     path('superadmin/request/<int:pk>/status/', views.update_request_status, name='change_status'),
+    path('superadmin/categories/', views.admin_categories, name='admin_categories'),
+    path('superadmin/categories/<int:pk>/delete/', views.delete_category, name='delete_category'),
 ]
