@@ -3,7 +3,6 @@
 {% block title %}Главная — DesignPro Studio{% endblock %}
 
 {% block content %}
-<!-- Hero секция (твой стиль) -->
 <div class="hero">
     <div class="hero-content">
         <h1>DesignPro Studio</h1>
@@ -19,7 +18,6 @@
     </div>
 </div>
 
-<!-- Stats-bar (твой стиль + счётчик по ТЗ) -->
 <div class="stats-bar">
     <div class="stat-item">
         <div class="stat-number">{{ total_requests }}</div>
@@ -29,7 +27,6 @@
         <div class="stat-number">{{ completed_requests }}</div>
         <div class="stat-label">Выполнено</div>
     </div>
-    <!-- СЧЁТЧИК ПО ТЗ -->
     <div class="stat-item">
         <div class="stat-number">{{ in_progress_count }}</div>
         <div class="stat-label">Принято в работу</div>
@@ -44,7 +41,6 @@
     </div>
 </div>
 
-<!-- Направления (твой стиль) -->
 <h2 class="section-title">Наши направления</h2>
 <div class="projects-grid">
     <div class="project-card simple">
@@ -61,7 +57,6 @@
     </div>
 </div>
 
-<!-- БЛОК ПО ТЗ: 4 последние выполненные заявки -->
 {% if done_requests %}
 <h2 class="section-title">Последние выполненные проекты</h2>
 <div class="projects-grid">

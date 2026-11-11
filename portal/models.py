@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
-    """Категории заявок (3D-дизайн, 2D-дизайн, Эскиз и др.)"""
+    """Категории заявок """
     name = models.CharField('Название категории', max_length=100)
 
     class Meta:
@@ -12,7 +12,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class UserProfile(models.Model):
     """Расширенный профиль пользователя."""
