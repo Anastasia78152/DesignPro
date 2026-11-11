@@ -3,9 +3,8 @@ from django.contrib.auth.models import User
 
 
 class Category(models.Model):
-    """Категории дизайн-проектов (например, Кухня, Спальня, Офис)."""
+    """Категории заявок (3D-дизайн, 2D-дизайн, Эскиз и др.)"""
     name = models.CharField('Название категории', max_length=100)
-    description = models.TextField('Описание', blank=True)
 
     class Meta:
         verbose_name = 'Категория'
@@ -18,6 +17,7 @@ class Category(models.Model):
 class UserProfile(models.Model):
     """Расширенный профиль пользователя."""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    fio = models.CharField('ФИО', max_length=255, default='')
     phone = models.CharField('Телефон', max_length=20, blank=True)
     is_admin = models.BooleanField('Является администратором', default=False)
 
@@ -26,26 +26,26 @@ class UserProfile(models.Model):
         verbose_name_plural = 'Профили пользователей'
 
     def __str__(self):
-        return f"Профиль {self.user.username}"
+        return f"Профиль {self.user.username} ({self.fio})"
 
 
 class DesignRequest(models.Model):
     """Модель заявки на дизайн-проект."""
     STATUS_CHOICES = (
         ('new', 'Новая'),
-        ('in_progress', 'В работе'),
-        ('done', 'Выполнена'),
-        ('rejected', 'Отклонена'),
+        ('in_progress', 'Принято в работу'),
+        ('done', 'Выполнено'),
     )
 
-    title = models.CharField('Название проекта', max_length=200)
-    description = models.TextField('Описание задачи')
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, verbose_name='Категория')
+    title = models.CharField('Название', max_length=200)
+    description = models.TextField('Описание')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Заказчик')
-    photo = models.ImageField('Фото помещения', upload_to='requests_photos/', blank=True, null=True)
+    photo = models.ImageField('Фото помещения или план', upload_to='requests_photos/')
     status = models.CharField('Статус', max_length=20, choices=STATUS_CHOICES, default='new')
     created_at = models.DateTimeField('Дата создания', auto_now_add=True)
-    updated_at = models.DateTimeField('Дата обновления', auto_now=True)
+    design_image = models.ImageField('Изображение готового дизайна', upload_to='design_images/', blank=True, null=True)
+    admin_comment = models.TextField('Комментарий администратора', blank=True, null=True)
 
     class Meta:
         verbose_name = 'Заявка'
