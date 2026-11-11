@@ -1,24 +1,12 @@
 {% extends "portal/base.html" %}
-
-{% block title %}Изменение статуса — DesignPro{% endblock %}
-
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <h2>Изменение статуса заявки #{{ request_obj.id }}</h2>
-        <p><strong>Название:</strong> {{ request_obj.title }}</p>
-        <p><strong>Заказчик:</strong> {{ request_obj.user.username }}</p>
-        <form method="post">
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="mb-3">
-                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                {{ field }}
-            </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-            <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Отмена</a>
-        </form>
-    </div>
-</div>
+<h2>Смена статуса для: {{ req.title }}</h2>
+<p>Текущий статус: <strong>{{ req.get_status_display }}</strong></p>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Сохранить изменения</button>
+    <a href="{% url 'admin_dashboard' %}" class="btn">Отмена</a>
+</form>
 {% endblock %}

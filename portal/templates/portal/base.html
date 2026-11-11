@@ -2,20 +2,22 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Design.pro{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}DesignPro{% endblock %}</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
 </head>
 <body>
     <header>
-        <h1><a href="{% url 'index' %}" style="color:white; text-decoration:none;">Design.pro</a></h1>
+        <h1><a href="{% url 'index' %}">DESIGN.PRO</a></h1>
         <nav>
             {% if user.is_authenticated %}
-            <a href="{% url 'user_dashboard' %}">Мои заявки</a>
-            {% if user.is_staff %}
+            {% if user.is_staff or user.profile.is_admin %}
             <a href="{% url 'admin_dashboard' %}">Админ-панель</a>
+            {% else %}
+            <a href="{% url 'user_dashboard' %}">Мой кабинет</a>
             {% endif %}
-            <a href="{% url 'user_logout' %}">Выход ({{ user.username }})</a>
+            <a href="{% url 'user_logout' %}">Выйти</a>
             {% else %}
             <a href="{% url 'user_login' %}">Вход</a>
             <a href="{% url 'register' %}">Регистрация</a>
@@ -23,8 +25,25 @@
         </nav>
     </header>
 
-    <div class="container">
-        {% block content %}{% endblock %}
+    <div class="header-accent"></div>
+
+    {% if messages %}
+    <div style="position: fixed; top: 70px; right: 20px; z-index: 1000; max-width: 400px;">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" style="margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
     </div>
+    {% endif %}
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 DesignPro Studio. Все права защищены.</p>
+    </footer>
 </body>
 </html>

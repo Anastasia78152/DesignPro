@@ -1,0 +1,46 @@
+{% extends "portal/base.html" %}
+
+{% block title %}Управление категориями — DesignPro{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Управление категориями</h2>
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">← Назад к заявкам</a>
+</div>
+
+<div class="form-container mb-5">
+    <h3>Добавить новую категорию</h3>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% for error in field.errors %}
+            <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+</div>
+
+<h3>Существующие категории</h3>
+<div class="projects-grid">
+    {% for category in categories %}
+    <div class="project-card simple">
+        <h4>{{ category.name }}</h4>
+        <p class="project-meta">Заявок: {{ category.designrequest_set.count }}</p>
+        <form method="post" action="{% url 'delete_category' category.id %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-danger"
+                    onclick="return confirm('Удалить категорию и все её заявки? Это действие нельзя отменить.')">
+                Удалить
+            </button>
+        </form>
+    </div>
+    {% empty %}
+    <p>Категории пока не добавлены.</p>
+    {% endfor %}
+</div>
+{% endblock %}

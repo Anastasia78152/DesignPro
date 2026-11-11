@@ -1,25 +1,40 @@
 {% extends "portal/base.html" %}
 
-{% block title %}Создать заявку — DesignPro{% endblock %}
+{% block title %}Создание заявки — DesignPro{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <h2>Создание заявки на дизайн</h2>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="mb-3">
-                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                {{ field }}
-                {% for error in field.errors %}
-                <div class="text-danger">{{ error }}</div>
-                {% endfor %}
-            </div>
+<div class="form-container">
+    <h2>Создание заявки на дизайн</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% for field in form %}
+        <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">
+                {{ field.label }}
+                <span class="text-danger">*</span>
+            </label>
+            {{ field }}
+            {% if field.help_text %}
+            <div class="form-text">{{ field.help_text }}</div>
+            {% endif %}
+            {% for error in field.errors %}
+            <div class="text-danger">{{ error }}</div>
             {% endfor %}
-            <button type="submit" class="btn btn-primary">Создать заявку</button>
-            <a href="{% url 'user_dashboard' %}" class="btn btn-secondary">Отмена</a>
-        </form>
-    </div>
+        </div>
+        {% endfor %}
+
+        <div class="alert alert-info">
+            <strong>Требования к файлу:</strong>
+            <ul class="mb-0">
+                <li>Форматы: jpg, jpeg, png, bmp</li>
+                <li>Максимальный размер: 2 Мб</li>
+            </ul>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Создать заявку</button>
+        <a href="{% url 'user_dashboard' %}" class="btn btn-secondary">Отмена</a>
+    </form>
 </div>
 {% endblock %}

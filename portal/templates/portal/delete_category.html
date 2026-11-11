@@ -1,0 +1,20 @@
+{% extends "portal/base.html" %}
+
+{% block title %}Удаление категории — DesignPro{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="alert alert-danger">
+        <h4>Подтверждение удаления</h4>
+        <p>Вы уверены, что хотите удалить категорию <strong>"{{ category.name }}"</strong>?</p>
+        <p class="text-danger">
+            <strong>Внимание!</strong> Все заявки этой категории будут удалены без возможности восстановления.
+        </p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Да, удалить</button>
+        <a href="{% url 'admin_categories' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}

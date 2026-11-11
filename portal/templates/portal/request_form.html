@@ -1,0 +1,9 @@
+{% extends "portal/base.html" %}
+{% block content %}
+<h2>Новая заявка на дизайн</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Отправить заявку</button>
+</form>
+{% endblock %}
