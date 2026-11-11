@@ -88,7 +88,7 @@ nav {
                 width: 100%;
             }
 
-.container { 
+.container {
     margin: 150px;
     padding: 50px 60px;
     background: #F5EFE6;
@@ -563,7 +563,7 @@ h3 {
     color: #4C3D19;
     text-transform: uppercase;
     letter-spacing: 2px;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 h4 {
@@ -629,6 +629,183 @@ footer {
         font-size: 12px;
         letter-spacing: 2px;
         color: #E5D7C4;
+    }
+
+/* ============================================================
+   АДМИН-ПАНЕЛЬ — КАРТОЧНЫЙ ВИД
+   ============================================================ */
+.admin-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 30px;
+}
+
+.admin-card {
+    position: relative;
+    background: #F5EFE6;
+    border: 1px solid rgba(207, 187, 153, 0.4);
+    border-radius: 6px;
+    padding: 28px 32px 28px 40px;
+    box-shadow: 0 2px 12px rgba(76, 61, 25, 0.06);
+    transition: all 0.3s ease;
+}
+
+    .admin-card:hover {
+        box-shadow: 0 4px 20px rgba(76, 61, 25, 0.12);
+        transform: translateY(-2px);
+    }
+
+/* Вертикальная полоса слева */
+.admin-card-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: linear-gradient(180deg, #4C3D19 0%, #8B9063 100%);
+    border-radius: 6px 0 0 6px;
+}
+
+.admin-card-body {
+    position: relative;
+    z-index: 1;
+}
+
+.admin-card-title {
+    font-family: 'Georgia', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #354024;
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    letter-spacing: 0.5px;
+}
+
+.admin-card-status {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.status-new {
+    background: #EEF0E4;
+    color: #5A6142;
+    border: 1px solid #d0d5c0;
+}
+
+.status-in_progress {
+    background: #F6EAD3;
+    color: #A06E24;
+    border: 1px solid #e8d5a8;
+}
+
+.status-done {
+    background: #E4EDDD;
+    color: #3E5C2E;
+    border: 1px solid #c5d9b8;
+}
+
+.admin-card-meta {
+    font-size: 13px;
+    color: #8B9063;
+    margin: 0 0 14px 0;
+    letter-spacing: 0.5px;
+}
+
+.admin-card-desc {
+    font-size: 15px;
+    color: #354024;
+    line-height: 1.7;
+    margin: 0 0 20px 0;
+    font-weight: 300;
+}
+
+.admin-card-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-admin {
+    display: inline-block;
+    padding: 12px 28px;
+    background: #354024;
+    color: #E5D7C4;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: 1px solid #354024;
+}
+
+    .btn-admin:hover {
+        background: #4C3D19;
+        border-color: #4C3D19;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(53, 64, 36, 0.3);
+    }
+
+.admin-card-locked {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8B9063;
+    font-weight: 600;
+}
+
+/* Заголовок админки */
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+    .admin-header h2 {
+        font-family: 'Georgia', serif;
+        font-size: 32px;
+        font-weight: 300;
+        color: #354024;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin: 0;
+        padding-bottom: 16px;
+        border-bottom: 2px solid #CFBB99;
+    }
+
+.btn-categories {
+    display: inline-block;
+    padding: 12px 24px;
+    background: transparent;
+    color: #354024;
+    text-decoration: none;
+    border: 2px solid #354024;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+    .btn-categories:hover {
+        background: #354024;
+        color: #E5D7C4;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(53, 64, 36, 0.2);
     }
 
 @media (max-width: 768px) {
