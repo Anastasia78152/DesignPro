@@ -764,7 +764,6 @@ footer {
     font-weight: 600;
 }
 
-/* Заголовок админки */
 .admin-header {
     display: flex;
     justify-content: space-between;
