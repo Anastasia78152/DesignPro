@@ -18,9 +18,18 @@
             {% else %}
             <a href="{% url 'user_dashboard' %}">Мой кабинет</a>
             {% endif %}
+
             <a href="{% url 'user_logout' %}">Выйти</a>
+            <span class="user_name">
+                {%if user.profile.fio %}
+                {{user.profile.fio }}
+                {%else%}
+                {{user.username}}
+                {%endif%}
+            </span>
             {% else %}
             <a href="{% url 'user_login' %}">Вход</a>
+
             <a href="{% url 'register' %}">Регистрация</a>
             {% endif %}
         </nav>

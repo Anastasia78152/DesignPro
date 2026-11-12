@@ -23,6 +23,25 @@
                 От: {{ req.user.profile.fio|default:req.user.username }} | {{ req.created_at|date:"d.m.Y" }}
             </p>
             <p class="admin-card-desc">{{ req.description }}</p>
+            <div class="admin-card-images">
+                {% if req.photo %}
+                <div class="admin-image-block">
+                    <span class="admin-image-label">Фото помещения:</span>
+                    <a href="{{ req.photo.url }}" target="_blank">
+                        <img src="{{ req.photo.url }}" alt="Фото помещения" class="admin-thumb">
+                    </a>
+                </div>
+                {% endif %}
+
+                {% if req.design_image %}
+                <div class="admin-image-block">
+                    <span class="admin-image-label">Готовый дизайн:</span>
+                    <a href="{{ req.design_image.url }}" target="_blank">
+                        <img src="{{ req.design_image.url }}" alt="Готовый дизайн" class="admin-thumb">
+                    </a>
+                </div>
+                {% endif %}
+            </div>
             <div class="admin-card-actions">
                 {% if req.status == 'new' %}
                 <a href="{% url 'change_status' req.id %}" class="btn-admin">Сменить статус</a>
